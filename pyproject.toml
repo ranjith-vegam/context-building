@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "intime-common",
+    "intime-common-packages",
+    "pydantic-settings>=2.12.0",
+    "pymilvus>=2.6.3",
+    "ulid-py>=1.1.0",
+]
+
+[tool.uv.sources]
+intime-common = { path = "dependencies/intime_common-1.0.0-py3-none-any.whl" }
+intime-common-packages = { path = "dependencies/intime_common_packages-0.3.7-py3-none-any.whl" }
