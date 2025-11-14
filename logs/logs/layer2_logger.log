@@ -49,3 +49,17 @@
 11/14/2025 03:00:42 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
 11/14/2025 03:00:42 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
 11/14/2025 03:00:42 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
+11/14/2025 05:03:35 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 05:03:35 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 2 requests with max_concurrency=3
+11/14/2025 05:03:35 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 05:03:35 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/14/2025 05:07:18 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 05:07:18 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 2 requests with max_concurrency=3
+11/14/2025 05:07:18 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 05:07:18 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/14/2025 05:07:33 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 05:07:33 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 05:07:45 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/14/2025 05:07:45 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 05:07:45 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
+11/14/2025 05:07:45 PM - [           layer2.py::135] -        ERROR -             MainThread  - store_in_vector_db - Failed to store the layer-2 results in vector DB: <ParamError: (code=1, message=wrong type of argument [dimension], expected type: [int], got type: [CollectionSchema])>

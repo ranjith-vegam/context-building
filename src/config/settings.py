@@ -1,3 +1,4 @@
+from openai import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src.models import (
@@ -6,11 +7,16 @@ from src.models import (
     Layer3Settings
 )
 
+class MilvusSettings(BaseModel):
+    collection_name: str
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_nested_delimiter="__")
     layer1: Layer1Settings
     layer2: Layer2Settings
     layer3: Layer3Settings
+    
+    milvus: MilvusSettings
 
 
 _config_instance = None

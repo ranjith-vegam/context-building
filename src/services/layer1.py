@@ -4,16 +4,23 @@ from src.config import get_config
 from llm_wrapper import llm_chat
 
 from src.services.data_manager import DataManager
+from src.database.milvus_provider import vector_store_obj
 
 from src.utils import (
     read_prompt_file,
-    get_batched_token_estimation
+    get_batched_token_estimation,
+    
+    get_uuid,
+    
+    embedder_obj
 )
 
 class Layer1:
     def __init__(self, data_manager_obj: DataManager) -> None:
         self.logger = get_logger("layer1_logger")
         self.layer1_settings = get_config().layer1
+        self.milvus_settings = get_config().milvus
+        
         self.layer1_prompt = None
         self.results = []
         
@@ -84,3 +91,32 @@ class Layer1:
         except Exception as e:
             self.logger.error(f"Couldn't process layer-1: {str(e)}")
             raise e
+    
+    def store_in_vector_db(self):
+        try:
+            layer1_docs = []
+                
+            vectors = embedder_obj.embed(
+                texts=[res["summary"] for res in self.results]
+            )
+
+            for idx, res in enumerate(self.results):
+                layer1_docs.append(
+                    {
+                        "id" : get_uuid(),
+                        "file_id" : self.data_manager_obj.file_id,
+                        "dense_vector" : vectors["dense_vecs"][idx],
+                        "sparse_vector" : vectors["lexical_weights"][idx],
+                        "metadata" : res
+                    }
+                )
+            
+            print(f"LLM output: {len(self.results)}, milvus: {len(layer1_docs)}")
+            vector_store_obj.create_or_upsert_collection(
+                collection_name=self.milvus_settings.collection_name,
+                partition_name="layer_1",
+                documents=layer1_docs
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Failed to store the layer-1 results in vector DB: {str(e)}")

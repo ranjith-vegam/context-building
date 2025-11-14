@@ -6,9 +6,15 @@ from llm_wrapper import llm_chat
 from src.services.data_manager import DataManager
 from src.services.layer2 import Layer2
 
+from src.database.milvus_provider import vector_store_obj
+
 from src.utils import (
     read_prompt_file,
-    get_batched_token_estimation
+    get_batched_token_estimation,
+    
+    get_uuid,
+    
+    embedder_obj
 )
 
 class Layer3:
@@ -19,6 +25,7 @@ class Layer3:
         
         self.logger = get_logger("layer3_logger")
         self.layer3_settings = get_config().layer3
+        self.milvus_settings = get_config().milvus
         self.layer3_prompt = None
         self.results = []
         
@@ -84,3 +91,34 @@ class Layer3:
         except Exception as e:
             self.logger.error(f"Couldn't process layer-2: {str(e)}")
             raise e
+        
+    def store_in_vector_db(self):
+        try:
+            c = 0
+            layer3_docs = []
+            for res in self.results:
+                vectors = embedder_obj.embed(
+                    texts=[granular_chunk for granular_chunk in res["granular_chunks"]]
+                )                
+                for idx, granular_chunk in enumerate(res["granular_chunks"]):
+                    
+                    layer3_docs.append(
+                        {
+                            "id" : get_uuid(),
+                            "file_id" : self.data_manager_obj.file_id,
+                            "dense_vector" : vectors["dense_vecs"][idx],
+                            "sparse_vector" : vectors["lexical_weights"][idx],
+                            "metadata" : {"granular_chunk" : granular_chunk}
+                        }
+                    )
+                c += len(res["topics"])
+            
+            print(f"LLM output: {c}, milvus: {len(layer3_docs)}")
+            vector_store_obj.create_or_upsert_collection(
+                collection_name=self.milvus_settings.collection_name,
+                partition_name="layer_3",
+                documents=layer3_docs
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Failed to store the layer-2 results in vector DB: {str(e)}")    

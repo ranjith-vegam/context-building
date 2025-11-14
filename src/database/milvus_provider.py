@@ -38,63 +38,36 @@ class VectorStoreManager:
     def _create_collection(self, collection_name: str):
         schema = self.milvus_client.create_schema(auto_id=False, enable_dynamic_field=True)
 
-        # Define simplified fields
+        # Primary fields
         schema.add_field("id", DataType.VARCHAR, is_primary=True, max_length=36)
         schema.add_field("file_id", DataType.VARCHAR, max_length=36)
 
-        # Layer 1 vectors & metadata
-        schema.add_field("layer_1_dense_vector", DataType.FLOAT_VECTOR, dim=1024)
-        schema.add_field("layer_1_sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
-        schema.add_field("layer_1_metadata", DataType.JSON)
+        # Single vector layer
+        schema.add_field("dense_vector", DataType.FLOAT_VECTOR, dim=1024)
+        schema.add_field("sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
+        schema.add_field("metadata", DataType.JSON)
 
-        # Layer 2 vectors & metadata
-        schema.add_field("layer_2_dense_vector", DataType.FLOAT_VECTOR, dim=1024)
-        schema.add_field("layer_2_sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
-        schema.add_field("layer_2_metadata", DataType.JSON)
-
-        # Layer 3 vectors & metadata
-        schema.add_field("layer_3_dense_vector", DataType.FLOAT_VECTOR, dim=1024)
-        schema.add_field("layer_3_sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
-        schema.add_field("layer_3_metadata", DataType.JSON)
-
-        # Create collection
         self.milvus_client.create_collection(collection_name, schema)
-        milvus_logger.info(f"Created collection '{collection_name}' with 3-layer schema")
-
-        # Create indexes for each vector field
+        
         index_params = self.milvus_client.prepare_index_params()
-        for layer in ["layer_1", "layer_2", "layer_3"]:
-            index_params.add_index(f"{layer}_dense_vector", "COSINE", "IVF_FLAT", {"nlist": 128})
-            index_params.add_index(f"{layer}_sparse_vector", "IP", "SPARSE_INVERTED_INDEX", {"drop_ratio_build": 0.2})
+        index_params.add_index("dense_vector", "COSINE", "IVF_FLAT", {"nlist": 128})
+        index_params.add_index("sparse_vector", "IP", "SPARSE_INVERTED_INDEX", {"drop_ratio_build": 0.2})
 
         self.milvus_client.create_index(collection_name, index_params, sync=False)
-        milvus_logger.info(f"Indexes created for collection '{collection_name}'")
-
 
     # ---------------- Data Upsert & Insert ----------------
-    def _prepare_bulk_data(self, documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def _prepare_bulk_data(self, documents: list[dict[str, Any]]):
         return [
             {
                 "id": str(uuid.uuid4()),
                 "file_id": doc.get("file_id", ""),
-
-                # Layer 1
-                "layer_1_dense_vector": doc.get("layer_1", {}).get("dense", []),
-                "layer_1_sparse_vector": doc.get("layer_1", {}).get("sparse", {}),
-                "layer_1_metadata": doc.get("layer_1", {}).get("metadata", {}),
-
-                # Layer 2
-                "layer_2_dense_vector": doc.get("layer_2", {}).get("dense", []),
-                "layer_2_sparse_vector": doc.get("layer_2", {}).get("sparse", {}),
-                "layer_2_metadata": doc.get("layer_2", {}).get("metadata", {}),
-
-                # Layer 3
-                "layer_3_dense_vector": doc.get("layer_3", {}).get("dense", []),
-                "layer_3_sparse_vector": doc.get("layer_3", {}).get("sparse", {}),
-                "layer_3_metadata": doc.get("layer_3", {}).get("metadata", {}),
+                "dense_vector": doc.get("dense", []),
+                "sparse_vector": doc.get("sparse", {}),
+                "metadata": doc.get("metadata", {}),
             }
             for doc in documents
         ]
+
 
     def _insert_or_upsert(
         self, method: str, collection_name: str, documents: List[Dict[str, Any]], partition_name: str
@@ -209,3 +182,5 @@ class VectorStoreManager:
             )[0]
 
         return [item.get("entity", {}).get("metadata", {}) for item in res]
+
+vector_store_obj = VectorStoreManager(uri="http://192.168.1.49:19470")

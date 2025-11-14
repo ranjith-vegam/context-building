@@ -3,7 +3,8 @@ import json
 from log_manager import get_logger
 
 from src.utils import (
-    get_batched_token_estimation
+    get_batched_token_estimation,
+    get_ulid
 )
 
 from src.models import (
@@ -18,6 +19,8 @@ class DataManager:
         self.transcript_json = None
     
         self.merged_transcript_chunks = []
+        
+        self.file_id = get_ulid()
         
     def register_model(self, model_details: ModelDetailsConfig):
         try:
