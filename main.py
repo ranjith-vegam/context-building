@@ -2,6 +2,7 @@ from src.models import ModelDetailsConfig
 from src.services.data_manager import DataManager
 from src.services.layer1 import Layer1
 from src.services.layer2 import Layer2
+from src.services.layer3 import Layer3
 
 def main():
     data_manager_obj = DataManager()
@@ -22,6 +23,9 @@ def main():
     
     layer2_obj = Layer2(data_manager_obj=data_manager_obj, layer1_obj=layer1_obj)
     layer2_obj.process(results_file_path="tmp/1hr_transcript_results_layer2.json")
+    
+    layer3_obj = Layer3(data_manager_obj=data_manager_obj, layer2_obj=layer2_obj)
+    layer3_obj.process(results_file_path="tmp/1hr_transcript_results_layer3.json")
 
 if __name__ == "__main__":
     main()

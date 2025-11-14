@@ -164,3 +164,51 @@
 11/14/2025 02:37:45 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
 11/14/2025 02:37:45 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
 11/14/2025 02:37:45 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:39:44 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:39:44 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:39:44 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:39:52 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:39:52 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:39:52 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:39:52 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:39:52 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:39:52 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:40:07 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:40:07 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:40:07 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:41:18 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:41:18 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:41:18 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:41:25 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:41:25 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:41:25 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:41:26 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:41:26 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:41:26 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:41:41 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:41:41 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:41:41 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:58:12 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:58:12 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:58:12 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:58:20 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:58:20 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:58:20 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:58:21 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:58:21 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:58:21 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 02:58:36 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 02:58:36 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 02:58:36 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 02:59:57 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 02:59:57 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 02:59:57 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 03:00:05 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 03:00:05 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 03:00:05 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}
+11/14/2025 03:00:06 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 03:00:06 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 1 requests with max_concurrency=3
+11/14/2025 03:00:06 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 03:00:21 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 03:00:21 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 03:00:21 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 1, 'successful': 1, 'failed': 0}

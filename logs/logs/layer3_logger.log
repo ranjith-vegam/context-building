@@ -1,0 +1,10 @@
+11/14/2025 02:58:52 PM - [           layer3.py::85] -        ERROR -             MainThread  - process - Couldn't process layer-2: 'list' object has no attribute 'format'
+11/14/2025 03:00:42 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.3.196:9122/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/14/2025 03:00:42 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 2 requests with max_concurrency=3
+11/14/2025 03:00:42 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/14/2025 03:00:42 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/14/2025 03:00:57 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/14/2025 03:00:57 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 03:01:37 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/14/2025 03:01:37 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/14/2025 03:01:37 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
