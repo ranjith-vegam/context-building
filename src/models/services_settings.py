@@ -17,3 +17,7 @@ class LLMArgs(BaseModel):
 class Layer1Settings(BaseModel):
     prompt_filepath: str
     llm_args: Optional[LLMArgs] = None
+
+class Layer2Settings(BaseModel):
+    prompt_filepath: str
+    llm_args: Optional[LLMArgs] = None
