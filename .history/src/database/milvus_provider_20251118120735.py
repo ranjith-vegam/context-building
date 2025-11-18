@@ -47,26 +47,28 @@ class VectorStoreManager:
         schema.add_field("sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
         schema.add_field("metadata", DataType.JSON)
 
-        self.milvus_client.create_collection(
+        self.milvus_client.create_collection(collection_name, schema)
+
+        # ---- Correct Indexing ----
+        self.milvus_client.create_index(
             collection_name=collection_name,
-            schema=schema
-        )
-
-        index_params = self.milvus_client.prepare_index_params()
-        index_params.add_index(
             field_name="dense_vector",
-            metric_type="COSINE",
-            index_type="IVF_FLAT",
-            params={"nlist": 128},
-        )
-        index_params.add_index(
-            field_name="sparse_vector",
-            metric_type="IP",
-            index_type="SPARSE_INVERTED_INDEX",
-            params={"drop_ratio_build": 0.2},
+            index_params={
+                "index_type": "IVF_FLAT",
+                "metric_type": "COSINE",
+                "params": {"nlist": 128}
+            }
         )
 
-        self.milvus_client.create_index(collection_name, index_params, sync=False)
+        self.milvus_client.create_index(
+            collection_name=collection_name,
+            field_name="sparse_vector",
+            index_params={
+                "index_type": "SPARSE_INVERTED_INDEX",
+                "metric_type": "IP",
+                "params": {"drop_ratio_build": 0.2}
+            }
+        )
 
     # ---------------- Data Upsert & Insert ----------------
     def _prepare_bulk_data(self, documents: list[dict[str, Any]]):
@@ -83,11 +85,7 @@ class VectorStoreManager:
 
 
     def _insert_or_upsert(
-        self, 
-        method: str, 
-        collection_name: str, 
-        documents: List[Dict[str, Any]], 
-        partition_name: str
+        self, method: str, collection_name: str, documents: List[Dict[str, Any]], partition_name: str
     ):
         self.create_partition(collection_name, partition_name)
         data = self._prepare_bulk_data(documents)
@@ -96,12 +94,7 @@ class VectorStoreManager:
         fn = getattr(self.milvus_client, method)
         return fn(collection_name=collection_name, data=data, partition_name=partition_name)
 
-    def create_or_upsert_collection(
-            self, 
-            collection_name: str, 
-            documents: List[Dict[str, Any]], 
-            partition_name: str = "_default"
-    ):
+    def create_or_upsert_collection(self, collection_name: str, documents: List[Dict[str, Any]], partition_name: str = "_default"):
         if not self.milvus_client.has_collection(collection_name):
             milvus_logger.info(f"Collection '{collection_name}' not found. Creating new one...")
             self._create_collection(collection_name)

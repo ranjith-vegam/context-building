@@ -5,15 +5,12 @@ from src.services.layer1 import Layer1
 from src.services.layer2 import Layer2
 from src.services.layer3 import Layer3
 
-from src.utils import embedder_obj
-
 def main():
-    
     data_manager_obj = DataManager()
     data_manager_obj.register_model(
         model_details=ModelDetailsConfig(**{
             "model_name" : "RedHatAI/phi-4-quantized.w8a8",
-            "model_base_url" : "http://192.168.3.196:9122/v1",
+            "model_base_url" : "http://192.168.1.49:9991/v1",
             "max_concurrency" : 3,
             "max_prompt_tokens_threshold" : 4096
         })

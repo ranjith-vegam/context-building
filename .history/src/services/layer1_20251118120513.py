@@ -1,5 +1,4 @@
 import json
-import numpy as np
 from log_manager import get_logger
 from src.config import get_config
 from llm_wrapper import llm_chat
@@ -101,25 +100,27 @@ class Layer1:
                 texts=[res["summary"] for res in self.results]
             )
 
-            print(vectors["dense_vecs"][0], type(vectors["dense_vecs"][0]))
-            
-            for idx, res in enumerate(self.results):
-                layer1_docs.append(
-                    {
-                        "id" : get_uuid(),
-                        "file_id" : self.data_manager_obj.file_id,
-                        "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
-                        "sparse_vector" : vectors["lexical_weights"][idx],
-                        "metadata" : res
-                    }
-                )
-            
-            print(f"LLM output: {len(self.results)}, milvus: {len(layer1_docs)}")
-            vector_store_obj.create_or_upsert_collection(
-                collection_name=self.milvus_settings.collection_name,
-                partition_name="layer_1",
-                documents=layer1_docs
-            )
+for idx, res in enumerate(self.results):
+    dense_vec = vectors["dense_vecs"][idx]
+    if hasattr(dense_vec, "tolist"):
+        dense_vec = dense_vec.tolist()  # convert numpy → python list
+
+    lexical = vectors["lexical_weights"][idx]
+    sparse_vec = {
+        "indices": lexical.get("indices") or lexical.get("keys"),
+        "values": lexical.get("values") or lexical.get("weights")
+    }
+
+    layer1_docs.append(
+        {
+            "id": get_uuid(),
+            "file_id": self.data_manager_obj.file_id,
+            "dense_vector": dense_vec,
+            "sparse_vector": sparse_vec,
+            "metadata": res
+        }
+    )
+
             
         except Exception as e:
             self.logger.error(f"Failed to store the layer-1 results in vector DB: {str(e)}")

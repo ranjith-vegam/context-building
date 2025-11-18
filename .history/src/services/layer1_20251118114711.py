@@ -1,5 +1,4 @@
 import json
-import numpy as np
 from log_manager import get_logger
 from src.config import get_config
 from llm_wrapper import llm_chat
@@ -102,13 +101,13 @@ class Layer1:
             )
 
             print(vectors["dense_vecs"][0], type(vectors["dense_vecs"][0]))
-            
+
             for idx, res in enumerate(self.results):
                 layer1_docs.append(
                     {
                         "id" : get_uuid(),
                         "file_id" : self.data_manager_obj.file_id,
-                        "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
+                        "dense_vector" : vectors["dense_vecs"][idx],
                         "sparse_vector" : vectors["lexical_weights"][idx],
                         "metadata" : res
                     }

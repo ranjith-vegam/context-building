@@ -110,9 +110,9 @@ class Layer2:
             layer2_docs = []
             for res in self.results:
                 vectors = embedder_obj.embed(
-                    texts=[f"Topic: {elem['topic']}\nContent: {elem['content']}" for elem in res['topics']]
+                    texts=[f"Topic: {elem["topic"]}\nContent: {elem["content"]}" for elem in res["topics"]]
                 )                
-                for idx, metadata in enumerate(res['topics']):
+                for idx, metadata in enumerate(res["topics"]):
                     
                     layer2_docs.append(
                         {
@@ -123,7 +123,7 @@ class Layer2:
                             "metadata" : metadata
                         }
                     )
-                c += len(res['topics'])
+                c += len(res["topics"])
             
             print(f"LLM output: {c}, milvus: {len(layer2_docs)}")
             vector_store_obj.create_or_upsert_collection(

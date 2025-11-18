@@ -1,5 +1,5 @@
 import json
-import numpy as np
+import numpy
 from log_manager import get_logger
 from src.config import get_config
 from llm_wrapper import llm_chat

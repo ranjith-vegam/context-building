@@ -1,5 +1,4 @@
 import json
-import numpy as np
 from log_manager import get_logger
 from src.config import get_config
 from llm_wrapper import llm_chat
@@ -110,20 +109,20 @@ class Layer2:
             layer2_docs = []
             for res in self.results:
                 vectors = embedder_obj.embed(
-                    texts=[f"Topic: {elem['topic']}\nContent: {elem['content']}" for elem in res['topics']]
+                    texts=[f"Topic: {elem["topic"]}\nContent: {elem["content"]}" for elem in res["topics"]]
                 )                
-                for idx, metadata in enumerate(res['topics']):
+                for idx, metadata in enumerate(res["topics"]):
                     
                     layer2_docs.append(
                         {
                             "id" : get_uuid(),
                             "file_id" : self.data_manager_obj.file_id,
-                            "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
+                            "dense_vector" : vectors["dense_vecs"][idx],
                             "sparse_vector" : vectors["lexical_weights"][idx],
                             "metadata" : metadata
                         }
                     )
-                c += len(res['topics'])
+                c += len(res["topics"])
             
             print(f"LLM output: {c}, milvus: {len(layer2_docs)}")
             vector_store_obj.create_or_upsert_collection(

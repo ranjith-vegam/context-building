@@ -52,21 +52,7 @@ class VectorStoreManager:
             schema=schema
         )
 
-        index_params = self.milvus_client.prepare_index_params()
-        index_params.add_index(
-            field_name="dense_vector",
-            metric_type="COSINE",
-            index_type="IVF_FLAT",
-            params={"nlist": 128},
-        )
-        index_params.add_index(
-            field_name="sparse_vector",
-            metric_type="IP",
-            index_type="SPARSE_INVERTED_INDEX",
-            params={"drop_ratio_build": 0.2},
-        )
 
-        self.milvus_client.create_index(collection_name, index_params, sync=False)
 
     # ---------------- Data Upsert & Insert ----------------
     def _prepare_bulk_data(self, documents: list[dict[str, Any]]):

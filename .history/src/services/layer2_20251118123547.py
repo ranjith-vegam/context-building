@@ -123,7 +123,7 @@ class Layer2:
                             "metadata" : metadata
                         }
                     )
-                c += len(res['topics'])
+                c += len(res["topics"])
             
             print(f"LLM output: {c}, milvus: {len(layer2_docs)}")
             vector_store_obj.create_or_upsert_collection(

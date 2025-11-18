@@ -53,18 +53,8 @@ class VectorStoreManager:
         )
 
         index_params = self.milvus_client.prepare_index_params()
-        index_params.add_index(
-            field_name="dense_vector",
-            metric_type="COSINE",
-            index_type="IVF_FLAT",
-            params={"nlist": 128},
-        )
-        index_params.add_index(
-            field_name="sparse_vector",
-            metric_type="IP",
-            index_type="SPARSE_INVERTED_INDEX",
-            params={"drop_ratio_build": 0.2},
-        )
+        index_params.add_index("dense_vector", "COSINE", "IVF_FLAT", {"nlist": 128})
+        index_params.add_index("sparse_vector", "IP", "SPARSE_INVERTED_INDEX", {"drop_ratio_build": 0.2})
 
         self.milvus_client.create_index(collection_name, index_params, sync=False)
 

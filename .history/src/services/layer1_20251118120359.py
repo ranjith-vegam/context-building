@@ -1,5 +1,4 @@
 import json
-import numpy as np
 from log_manager import get_logger
 from src.config import get_config
 from llm_wrapper import llm_chat
@@ -101,15 +100,22 @@ class Layer1:
                 texts=[res["summary"] for res in self.results]
             )
 
-            print(vectors["dense_vecs"][0], type(vectors["dense_vecs"][0]))
-            
+            if hasattr(dense_vec, "tolist"):
+                dense_vec = dense_vec.tolist()  # convert numpy → python list
+
+            lexical = vectors["lexical_weights"][idx]
+            sparse_vec = {
+                "indices": lexical.get("indices") or lexical.get("keys"),
+                "values": lexical.get("values") or lexical.get("weights")
+            }
+
             for idx, res in enumerate(self.results):
                 layer1_docs.append(
                     {
                         "id" : get_uuid(),
                         "file_id" : self.data_manager_obj.file_id,
-                        "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
-                        "sparse_vector" : vectors["lexical_weights"][idx],
+                        "dense_vector" : dense_vec,
+                        "sparse_vector" : sparse_vec,
                         "metadata" : res
                     }
                 )

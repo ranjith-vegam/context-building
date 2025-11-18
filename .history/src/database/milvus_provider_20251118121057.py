@@ -44,29 +44,31 @@ class VectorStoreManager:
         schema.add_field("id", DataType.VARCHAR, is_primary=True, max_length=36)
         schema.add_field("file_id", DataType.VARCHAR, max_length=36)
         schema.add_field("dense_vector", DataType.FLOAT_VECTOR, dim=1024)
-        schema.add_field("sparse_vector", DataType.SPARSE_FLOAT_VECTOR)
+        schema.add_field("sparse_vector", DataType.SPARSE_FLOAT_VECTOR, dim)
         schema.add_field("metadata", DataType.JSON)
 
-        self.milvus_client.create_collection(
+        self.milvus_client.create_collection(collection_name, schema)
+
+        # ---- Correct Indexing ----
+        self.milvus_client.create_index(
             collection_name=collection_name,
-            schema=schema
-        )
-
-        index_params = self.milvus_client.prepare_index_params()
-        index_params.add_index(
             field_name="dense_vector",
-            metric_type="COSINE",
-            index_type="IVF_FLAT",
-            params={"nlist": 128},
-        )
-        index_params.add_index(
-            field_name="sparse_vector",
-            metric_type="IP",
-            index_type="SPARSE_INVERTED_INDEX",
-            params={"drop_ratio_build": 0.2},
+            index_params={
+                "index_type": "IVF_FLAT",
+                "metric_type": "COSINE",
+                "params": {"nlist": 128}
+            }
         )
 
-        self.milvus_client.create_index(collection_name, index_params, sync=False)
+        self.milvus_client.create_index(
+            collection_name=collection_name,
+            field_name="sparse_vector",
+            index_params={
+                "index_type": "SPARSE_INVERTED_INDEX",
+                "metric_type": "IP",
+                "params": {"drop_ratio_build": 0.2}
+            }
+        )
 
     # ---------------- Data Upsert & Insert ----------------
     def _prepare_bulk_data(self, documents: list[dict[str, Any]]):
