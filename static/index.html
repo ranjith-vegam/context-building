@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modern Chatbot UI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- MAIN CHAT AREA -->
+    <main class="chat-area" id="chatArea" aria-live="polite">
+      <header class="header">
+        <div class="header-left">
+          <h1 class="title">Assistant</h1>
+        </div>
+      </header>
+
+      <section class="messages" id="messages" role="log" aria-relevant="additions"></section>
+
+      <form class="composer" id="composer" onsubmit="return false;">
+        <textarea id="userInput" class="input" rows="1" placeholder="Type a message..." aria-label="Message input"></textarea>
+        <button type="button" id="sendBtn" class="send">Send</button>
+      </form>
+    </main>
+
+    <!-- CITATIONS DRAWER + OVERLAY -->
+    <div id="overlay" class="overlay" tabindex="-1" hidden></div>
+    <aside id="drawer" class="drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <h2>Citations</h2>
+        <button id="closeDrawer" class="close" aria-label="Close citations">✕</button>
+      </div>
+      <div id="drawerContent" class="drawer-content" tabindex="0"></div>
+    </aside>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

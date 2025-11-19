@@ -111,7 +111,7 @@ class Layer3:
                             "sparse_vector" : vectors["lexical_weights"][idx],
                             "metadata" : {
                                 "granular_chunk" : granular_chunk,
-                                "file_path" : self.data_manager_obj.file_path
+                                "file_name" : self.data_manager_obj.file_path.split("/")[1].split(".")[0]
                             }
                         }
                     )

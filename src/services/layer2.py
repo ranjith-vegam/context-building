@@ -113,7 +113,7 @@ class Layer2:
                     texts=[f"Topic: {elem['topic']}\nContent: {elem['content']}" for elem in res['topics']]
                 )                
                 for idx, metadata in enumerate(res['topics']):
-                    metadata["file_path"] = self.data_manager_obj.file_path
+                    metadata["file_name"] = self.data_manager_obj.file_path.split("/")[1].split(".")[0]
                     layer2_docs.append(
                         {
                             "id" : get_uuid(),

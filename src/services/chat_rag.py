@@ -103,10 +103,17 @@ class ChatRAG():
             )
 
             resp = llm_results[0]
-            return json.loads(resp.response)["response"]
+            return {
+                "response" : json.loads(resp.response)["response"],
+                "citations" : layer1_context + layer2_context
+            }
 
         except Exception as e:
             self.logger.error(f"Failed to answer the user query-{user_query} : {str(e)}")
+            return {
+                "response" : "Something went wrong, Try again",
+                "citations" : []
+            }            
 
     def layer_1_retrieval(self, vector: dict):
         try:
@@ -134,4 +141,14 @@ class ChatRAG():
             )
             return retrieved_context
         except Exception as e:
-            self.logger.error(f"Failed in Layer-2 retrieval: {str(e)}")            
+            self.logger.error(f"Failed in Layer-2 retrieval: {str(e)}")
+
+chat_obj = ChatRAG()
+chat_obj.register_model(
+    model_details=ModelDetailsConfig(**{
+        "model_name" : "RedHatAI/phi-4-quantized.w8a8",
+        "model_base_url" : "http://192.168.1.49:9991/v1",
+        "max_concurrency" : 3,
+        "max_prompt_tokens_threshold" : 4096
+    })        
+)                     

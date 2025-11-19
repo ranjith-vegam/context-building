@@ -84,7 +84,7 @@ class Layer1:
                         texts=[previous_chunk_summary], 
                         model_name=self.data_manager_obj.model_details.model_name
                     )[0],
-                    "file_path" : self.data_manager_obj.file_path
+                    "file_path" : self.data_manager_obj.file_path.split("/")[1].split(".")[0]
                 })
             
             with open(results_file_path, "w") as f:
@@ -102,16 +102,15 @@ class Layer1:
                 texts=[self.results[-1]["summary"]]
             )
             
-            for idx, res in enumerate(self.results):
-                layer1_docs.append(
-                    {
-                        "id" : get_uuid(),
-                        "file_id" : self.data_manager_obj.file_id,
-                        "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
-                        "sparse_vector" : vectors["lexical_weights"][idx],
-                        "metadata" : res
-                    }
-                )
+            layer1_docs.append(
+                {
+                    "id" : get_uuid(),
+                    "file_id" : self.data_manager_obj.file_id,
+                    "dense_vector" : np.asarray(vectors["dense_vecs"][0], dtype=np.float32),
+                    "sparse_vector" : vectors["lexical_weights"][0],
+                    "metadata" : self.results[-1]
+                }
+            )
             
             self.logger.info(f"LLM output: {len(self.results)}, milvus: {len(layer1_docs)}")
             vector_store_obj.create_or_upsert_collection(
