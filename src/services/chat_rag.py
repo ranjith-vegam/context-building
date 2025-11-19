@@ -62,8 +62,9 @@ class ChatRAG():
 
             layer1_context = self.layer_1_retrieval(vector=vector)
             file_ids = []
-            for cntx in layer1_context:
+            for idx, cntx in enumerate(layer1_context):
                 file_ids.append(cntx["file_id"])
+                layer1_context[idx]["layer"] = 1
             
             layer2_context = self.layer_2_retrieval(
                 vector=vector, 
@@ -73,9 +74,10 @@ class ChatRAG():
             )
             
             context = ""
-            for cntx in layer2_context:
+            for idx, cntx in enumerate(layer2_context):
                 metadata = cntx["metadata"]
                 context += f"{metadata["topic"]}\n{metadata["content"]}\n\n"
+                layer2_context[idx]["layer"] = 2
             
             if not self.chat_prompt:
                 self.chat_prompt = read_prompt_file(

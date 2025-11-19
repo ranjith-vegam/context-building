@@ -190,7 +190,7 @@ class VectorStoreManager:
                 ranker=ranker,
                 limit=top_K,
                 partition_names=valid_partitions or None,
-                output_fields=["metadata", "id", "file_id"],
+                output_fields=["metadata", "file_id"],
             )[0]
         except MilvusException as e:
             milvus_logger.error(f"Hybrid search failed in partitions {valid_partitions}: {e}")
@@ -200,7 +200,7 @@ class VectorStoreManager:
                 reqs=[dense_req, sparse_req],
                 ranker=ranker,
                 limit=top_K,
-                output_fields=["metadata", "id", "file_id"],
+                output_fields=["metadata", "file_id"],
             )[0]
 
         return [item.get("entity", {}) for item in res]
