@@ -83,7 +83,8 @@ class Layer1:
                     "summary_tokens" : get_batched_token_estimation(
                         texts=[previous_chunk_summary], 
                         model_name=self.data_manager_obj.model_details.model_name
-                    )[0]
+                    )[0],
+                    "file_path" : self.data_manager_obj.file_path
                 })
             
             with open(results_file_path, "w") as f:
@@ -98,10 +99,8 @@ class Layer1:
             layer1_docs = []
                 
             vectors = embedder_obj.embed(
-                texts=[res["summary"] for res in self.results]
+                texts=[self.results[-1]["summary"]]
             )
-
-            print(vectors["dense_vecs"][0], type(vectors["dense_vecs"][0]))
             
             for idx, res in enumerate(self.results):
                 layer1_docs.append(
@@ -114,10 +113,10 @@ class Layer1:
                     }
                 )
             
-            print(f"LLM output: {len(self.results)}, milvus: {len(layer1_docs)}")
+            self.logger.info(f"LLM output: {len(self.results)}, milvus: {len(layer1_docs)}")
             vector_store_obj.create_or_upsert_collection(
                 collection_name=self.milvus_settings.collection_name,
-                partition_name="layer_1",
+                partition_name=self.milvus_settings.partition_layer1,
                 documents=layer1_docs
             )
             

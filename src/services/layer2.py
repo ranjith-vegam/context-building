@@ -113,7 +113,7 @@ class Layer2:
                     texts=[f"Topic: {elem['topic']}\nContent: {elem['content']}" for elem in res['topics']]
                 )                
                 for idx, metadata in enumerate(res['topics']):
-                    
+                    metadata["file_path"] = self.data_manager_obj.file_path
                     layer2_docs.append(
                         {
                             "id" : get_uuid(),
@@ -125,10 +125,10 @@ class Layer2:
                     )
                 c += len(res['topics'])
             
-            print(f"LLM output: {c}, milvus: {len(layer2_docs)}")
+            self.logger.info(f"LLM output: {c}, milvus: {len(layer2_docs)}")
             vector_store_obj.create_or_upsert_collection(
                 collection_name=self.milvus_settings.collection_name,
-                partition_name="layer_2",
+                partition_name=self.milvus_settings.partition_layer2,
                 documents=layer2_docs
             )
             

@@ -24,4 +24,8 @@ class Layer2Settings(BaseModel):
     
 class Layer3Settings(BaseModel):
     prompt_filepath: str
-    llm_args: Optional[LLMArgs] = None    
+    llm_args: Optional[LLMArgs] = None
+
+class ChatSettings(BaseModel):
+    prompt_filepath: str
+    llm_args: Optional[LLMArgs] = None

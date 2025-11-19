@@ -21,6 +21,7 @@ class DataManager:
         self.merged_transcript_chunks = []
         
         self.file_id = get_ulid()
+        self.file_path: str = None
         
     def register_model(self, model_details: ModelDetailsConfig):
         try:
@@ -48,7 +49,7 @@ class DataManager:
             
     def merge_transcript_chunks_by_token(self, file_path: str):                
         try:
-            
+            self.file_path = file_path
             self._load_transcript(file_path=file_path)
             
             # Merge segments until threshold

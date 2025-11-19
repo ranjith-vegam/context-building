@@ -109,15 +109,18 @@ class Layer3:
                             "file_id" : self.data_manager_obj.file_id,
                             "dense_vector" : np.asarray(vectors["dense_vecs"][idx], dtype=np.float32),
                             "sparse_vector" : vectors["lexical_weights"][idx],
-                            "metadata" : {"granular_chunk" : granular_chunk}
+                            "metadata" : {
+                                "granular_chunk" : granular_chunk,
+                                "file_path" : self.data_manager_obj.file_path
+                            }
                         }
                     )
                 c += len(res["granular_chunks"])
             
-            print(f"LLM output: {c}, milvus: {len(layer3_docs)}")
+            self.logger.info(f"LLM output: {c}, milvus: {len(layer3_docs)}")
             vector_store_obj.create_or_upsert_collection(
                 collection_name=self.milvus_settings.collection_name,
-                partition_name="layer_3",
+                partition_name=self.milvus_settings.partition_layer3,
                 documents=layer3_docs
             )
             

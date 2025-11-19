@@ -12,3 +12,5 @@ wheels/
 # Temp Folders
 tmp
 logs
+
+.history

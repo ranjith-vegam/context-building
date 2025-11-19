@@ -4,11 +4,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from src.models import (
     Layer1Settings,
     Layer2Settings,
-    Layer3Settings
+    Layer3Settings,
+
+    ChatSettings
 )
 
 class MilvusSettings(BaseModel):
     collection_name: str
+    partition_layer1: str
+    partition_layer2: str
+    partition_layer3: str
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_nested_delimiter="__")
@@ -17,6 +22,7 @@ class Settings(BaseSettings):
     layer3: Layer3Settings
     
     milvus: MilvusSettings
+    chat: ChatSettings
 
 
 _config_instance = None
