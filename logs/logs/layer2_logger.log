@@ -8,3 +8,23 @@
 11/19/2025 04:55:25 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
 11/19/2025 04:55:25 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
 11/19/2025 04:55:25 PM - [           layer2.py::129] -         INFO -             MainThread  - store_in_vector_db - LLM output: 10, milvus: 10
+11/19/2025 06:23:21 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/19/2025 06:23:21 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 2 requests with max_concurrency=3
+11/19/2025 06:23:21 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/19/2025 06:23:21 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/19/2025 06:23:34 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/19/2025 06:23:34 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/19/2025 06:23:38 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/19/2025 06:23:38 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/19/2025 06:23:38 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
+11/19/2025 06:23:38 PM - [           layer2.py::136] -        ERROR -             MainThread  - store_in_vector_db - Failed to store the layer-2 results in vector DB: CUDA out of memory. Tried to allocate 490.00 MiB. GPU 0 has a total capacity of 23.53 GiB of which 128.06 MiB is free. Process 96010 has 18.39 GiB memory in use. Process 963960 has 4.62 GiB memory in use. Including non-PyTorch memory, this process has 384.00 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+11/20/2025 10:37:51 AM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 10:37:51 AM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 2 requests with max_concurrency=3
+11/20/2025 10:37:51 AM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 10:37:51 AM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 10:38:03 AM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 10:38:03 AM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 10:38:08 AM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 10:38:08 AM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 10:38:08 AM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
+11/20/2025 10:38:08 AM - [           layer2.py::128] -         INFO -             MainThread  - store_in_vector_db - LLM output: 11, milvus: 11

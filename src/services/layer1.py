@@ -84,7 +84,7 @@ class Layer1:
                         texts=[previous_chunk_summary], 
                         model_name=self.data_manager_obj.model_details.model_name
                     )[0],
-                    "file_path" : self.data_manager_obj.file_path.split("/")[1].split(".")[0]
+                    "file_name" : self.data_manager_obj.file_path.split("/")[1].split(".")[0]
                 })
             
             with open(results_file_path, "w") as f:

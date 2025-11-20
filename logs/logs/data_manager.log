@@ -1,1 +1,4 @@
 11/19/2025 04:54:40 PM - [     data_manager.py::77] -         INFO -             MainThread  - merge_transcript_chunks_by_token - Merged transcript chunks according to model's prompt tokens threshold
+11/19/2025 06:22:55 PM - [     data_manager.py::77] -         INFO -             MainThread  - merge_transcript_chunks_by_token - Merged transcript chunks according to model's prompt tokens threshold
+11/20/2025 10:36:12 AM - [     data_manager.py::77] -         INFO -             MainThread  - merge_transcript_chunks_by_token - Merged transcript chunks according to model's prompt tokens threshold
+11/20/2025 10:37:25 AM - [     data_manager.py::77] -         INFO -             MainThread  - merge_transcript_chunks_by_token - Merged transcript chunks according to model's prompt tokens threshold

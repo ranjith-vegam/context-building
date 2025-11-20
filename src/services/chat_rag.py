@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import markdown
 
 from log_manager import get_logger
 from llm_wrapper import llm_chat
@@ -8,6 +9,7 @@ from src.models import ModelDetailsConfig
 from src.config import get_config
 from src.database.milvus_provider import vector_store_obj
 from src.utils import (
+    get_batched_token_estimation,
     read_prompt_file,
     embedder_obj
 )
@@ -65,6 +67,8 @@ class ChatRAG():
             for idx, cntx in enumerate(layer1_context):
                 file_ids.append(cntx["file_id"])
                 layer1_context[idx]["layer"] = 1
+                layer1_context[idx]["file_name"] = "_".join(cntx["metadata"]["file_name"].split("_")[:-1])
+                del layer1_context[idx]["file_id"]
             
             layer2_context = self.layer_2_retrieval(
                 vector=vector, 
@@ -78,6 +82,8 @@ class ChatRAG():
                 metadata = cntx["metadata"]
                 context += f"{metadata["topic"]}\n{metadata["content"]}\n\n"
                 layer2_context[idx]["layer"] = 2
+                layer2_context[idx]["file_name"] = "_".join(cntx["metadata"]["file_name"].split("_")[:-1])
+                del layer2_context[idx]["file_id"]
             
             if not self.chat_prompt:
                 self.chat_prompt = read_prompt_file(
@@ -85,13 +91,19 @@ class ChatRAG():
                 )
 
             self.chat_settings.llm_args.response_format = self.output_schema
+            message_content = self.chat_prompt.format(
+                retrieved_context=context,
+                user_query=user_query
+            )
+            chat_prompt_tokens = get_batched_token_estimation(
+                texts=[message_content],
+                model_name=self.model_details.model_name
+            )
+            self.logger.info(f"Chat Prompt Tokens - {chat_prompt_tokens}")
 
             messages = [{
                 "role" : "user",
-                "content" : self.chat_prompt.format(
-                    retrieved_context=context,
-                    user_query=user_query
-                )
+                "content" : message_content
             }]
 
             # Calling LLM

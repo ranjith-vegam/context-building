@@ -3,44 +3,81 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Modern Chatbot UI</title>
-
-  <!-- Inter font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/static/style.css">
+  <title>AI Assistant Chat</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
   <div class="app">
-
+    
     <!-- MAIN CHAT AREA -->
-    <main class="chat-area" id="chatArea" aria-live="polite">
+    <main class="chat-area" id="chatArea">
+      
+      <!-- Header -->
       <header class="header">
-        <div class="header-left">
-          <h1 class="title">Assistant</h1>
+        <div class="header-content">
+          <div class="header-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="title">AI Assistant</h1>
+            <p class="subtitle">Ask me anything</p>
+          </div>
         </div>
       </header>
 
-      <section class="messages" id="messages" role="log" aria-relevant="additions"></section>
+      <!-- Messages Container -->
+      <section class="messages" id="messages"></section>
 
+      <!-- Input Composer -->
       <form class="composer" id="composer" onsubmit="return false;">
-        <textarea id="userInput" class="input" rows="1" placeholder="Type a message..." aria-label="Message input"></textarea>
-        <button type="button" id="sendBtn" class="send">Send</button>
+        <div class="input-wrapper">
+          <textarea 
+            id="userInput" 
+            class="input" 
+            rows="1" 
+            placeholder="Type your message here..."
+            aria-label="Message input"
+          ></textarea>
+          <button type="button" id="sendBtn" class="send-btn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </div>
       </form>
     </main>
 
-    <!-- CITATIONS DRAWER + OVERLAY -->
-    <div id="overlay" class="overlay" tabindex="-1" hidden></div>
+    <!-- Overlay for drawer -->
+    <div id="overlay" class="overlay" hidden></div>
+    
+    <!-- Citations Drawer -->
     <aside id="drawer" class="drawer" aria-hidden="true">
       <div class="drawer-header">
-        <h2>Citations</h2>
-        <button id="closeDrawer" class="close" aria-label="Close citations">✕</button>
+        <div class="drawer-title-wrapper">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="drawer-icon">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          </svg>
+          <h2>Source Citations</h2>
+        </div>
+        <button id="closeDrawer" class="close-btn" aria-label="Close citations">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
       </div>
-      <div id="drawerContent" class="drawer-content" tabindex="0"></div>
+      <div id="drawerContent" class="drawer-content"></div>
     </aside>
 
   </div>
 
-  <script src="/static/script.js"></script>
+  <!-- JavaScript -->
+  <script src="static/script.js"></script>
 </body>
 </html>
