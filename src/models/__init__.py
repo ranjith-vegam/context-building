@@ -4,4 +4,8 @@ from .services_settings import (
     Layer3Settings,
     ChatSettings
 )
-from .model_details_config import ModelDetailsConfig
+from .model_details_config import (
+    ModelDetailsConfig,
+    ChatRequest,
+    ChatResponse
+)

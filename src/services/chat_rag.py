@@ -5,7 +5,7 @@ import markdown
 from log_manager import get_logger
 from llm_wrapper import llm_chat
 
-from src.models import ModelDetailsConfig
+from src.models import ModelDetailsConfig, ChatRequest
 from src.config import get_config
 from src.database.milvus_provider import vector_store_obj
 from src.utils import (
@@ -58,11 +58,15 @@ class ChatRAG():
         except Exception as e:
             self.logger.error(f"Failed get embedding for user query: {str(e)}")
 
-    def chat_query(self, user_query: str):
+    def chat_query(self, chat_request: ChatRequest):
         try:
+            user_query = chat_request.message
             vector = self.get_query_embedding(user_query=user_query)
 
-            layer1_context = self.layer_1_retrieval(vector=vector)
+            layer1_context = self.layer_1_retrieval(
+                vector=vector,
+                topk=chat_request.top_k_layer_1
+            )
             file_ids = []
             for idx, cntx in enumerate(layer1_context):
                 file_ids.append(cntx["file_id"])
@@ -74,7 +78,8 @@ class ChatRAG():
                 vector=vector, 
                 filters={
                     "file_id" : file_ids
-                }
+                },
+                topk=chat_request.top_k_layer_2
             )
             
             context = ""
@@ -130,28 +135,28 @@ class ChatRAG():
                 "citations" : []
             }            
 
-    def layer_1_retrieval(self, vector: dict):
+    def layer_1_retrieval(self, vector: dict, topk: int):
         try:
             retrieved_context = vector_store_obj.hybrid_search(
                 collection_name=self.milvus_settings.collection_name,
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer1],
-                top_K=2
+                top_K=topk
             )
             return retrieved_context
         except Exception as e:
             self.logger.error(f"Failed in Layer-1 retrieval: {str(e)}")
 
 
-    def layer_2_retrieval(self, vector: dict, filters: dict):
+    def layer_2_retrieval(self, vector: dict, filters: dict, topk: int):
         try:
             retrieved_context = vector_store_obj.hybrid_search(
                 collection_name=self.milvus_settings.collection_name,
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer2],
-                top_K=5,
+                top_K=topk,
                 filters=filters
             )
             return retrieved_context

@@ -8,6 +8,13 @@ const drawer = document.getElementById('drawer');
 const drawerContent = document.getElementById('drawerContent');
 const overlay = document.getElementById('overlay');
 const closeDrawerBtn = document.getElementById('closeDrawer');
+const settingsToggle = document.getElementById('settingsToggle');
+const settingsPanel = document.getElementById('settingsPanel');
+
+// Inputs for Top K
+const topK1 = document.getElementById('topK1');
+const topK2 = document.getElementById('topK2');
+const topK3 = document.getElementById('topK3');
 
 // ========================================
 // INITIALIZATION
@@ -41,6 +48,11 @@ function autoResizeTextarea(el, maxRatio = 0.5) {
 // ========================================
 // EVENT LISTENERS
 // ========================================
+
+// Toggle Settings Panel
+settingsToggle.addEventListener('click', () => {
+  settingsPanel.classList.toggle('hidden');
+});
 
 // Auto-resize input as user types
 userInput.addEventListener('input', () => {
@@ -318,6 +330,11 @@ async function sendMessage() {
   const content = userInput.value.trim();
   if (!content) return;
   
+  // Get Top K values
+  const k1 = parseInt(topK1.value) || 2;
+  const k2 = parseInt(topK2.value) || 5;
+  const k3 = parseInt(topK3.value) || 3;
+
   // Disable send button during request
   sendBtn.disabled = true;
   
@@ -342,13 +359,18 @@ async function sendMessage() {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   try {
-    // Make API request
+    // Make API request with new parameters
     const response = await fetch('http://localhost:6789/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: content })
+      body: JSON.stringify({ 
+        message: content,
+        top_k_layer_1: k1,
+        top_k_layer_2: k2,
+        top_k_layer_3: k3
+      })
     });
     
     if (!response.ok) {

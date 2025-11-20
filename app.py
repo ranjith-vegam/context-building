@@ -1,10 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+
 import uvicorn
 import asyncio
+
+from src.models import (
+    ChatResponse,
+    ChatRequest
+)
 
 from src.services.chat_rag import chat_obj
 
@@ -30,16 +35,6 @@ async def serve_frontend():
     return FileResponse("static/index.html")
 
 
-# Request model
-class ChatRequest(BaseModel):
-    message: str
-
-
-# Response model
-class ChatResponse(BaseModel):
-    response: str
-    citations: list[dict]
-
 async def run_in_thread(func, *args, **kwargs):
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(None, lambda: func(*args, **kwargs))
@@ -47,9 +42,7 @@ async def run_in_thread(func, *args, **kwargs):
 # Chat endpoint
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(req: ChatRequest):
-    user_message = req.message
-
-    resp =  await run_in_thread(chat_obj.chat_query, user_message)
+    resp =  await run_in_thread(chat_obj.chat_query, req)
 
     return ChatResponse(
         response=resp["response"],
