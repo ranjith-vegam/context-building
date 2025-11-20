@@ -49,6 +49,13 @@ async def chat_endpoint(req: ChatRequest):
         citations=resp["citations"]
     )
 
+# Chat endpoint
+@app.post("/collections")
+async def chat_endpoint():
+    return [
+        "testing"
+    ]
+
 
 # Run uvicorn automatically if executed directly
 if __name__ == "__main__":

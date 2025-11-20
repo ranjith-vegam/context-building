@@ -11,7 +11,8 @@ const closeDrawerBtn = document.getElementById('closeDrawer');
 const settingsToggle = document.getElementById('settingsToggle');
 const settingsPanel = document.getElementById('settingsPanel');
 
-// Inputs for Top K
+// Inputs for Settings
+const collectionSelect = document.getElementById('collectionSelect');
 const topK1 = document.getElementById('topK1');
 const topK2 = document.getElementById('topK2');
 const topK3 = document.getElementById('topK3');
@@ -22,10 +23,60 @@ const topK3 = document.getElementById('topK3');
 drawer.classList.remove('open');
 overlay.hidden = true;
 
-// Focus input on load
+// Load initial data
 window.addEventListener('load', () => {
   userInput.focus();
+  fetchCollections();
 });
+
+// ========================================
+// FETCH COLLECTIONS FROM BACKEND
+// ========================================
+async function fetchCollections() {
+  try {
+    // Assuming the endpoint is /collections
+    const response = await fetch('http://localhost:6789/collections', {method: 'POST'});
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch collections');
+    }
+    
+    // Expecting an array of strings: ["collection1", "collection2"]
+    const collections = await response.json();
+    
+    // Clear loading option
+    collectionSelect.innerHTML = '';
+    
+    if (Array.isArray(collections) && collections.length > 0) {
+      collections.forEach(colName => {
+        const option = document.createElement('option');
+        option.value = colName;
+        option.textContent = colName;
+        collectionSelect.appendChild(option);
+      });
+      // Select the first one by default
+      collectionSelect.selectedIndex = 0;
+    } else {
+      const option = document.createElement('option');
+      option.textContent = "No collections found";
+      option.disabled = true;
+      collectionSelect.appendChild(option);
+    }
+    
+  } catch (err) {
+    console.error('Error loading collections:', err);
+    collectionSelect.innerHTML = '<option value="" disabled>Error loading list</option>';
+    
+    // Optional: For testing UI without backend, uncomment below:
+    // const mockData = ["finance_docs", "medical_records", "legal_v1"];
+    // collectionSelect.innerHTML = '';
+    // mockData.forEach(c => {
+    //   const opt = document.createElement('option');
+    //   opt.value = c; opt.textContent = c;
+    //   collectionSelect.appendChild(opt);
+    // });
+  }
+}
 
 // ========================================
 // AUTO-RESIZE TEXTAREA
@@ -330,10 +381,17 @@ async function sendMessage() {
   const content = userInput.value.trim();
   if (!content) return;
   
-  // Get Top K values
+  // Get Settings Values
+  const collectionName = collectionSelect.value;
   const k1 = parseInt(topK1.value) || 2;
   const k2 = parseInt(topK2.value) || 5;
   const k3 = parseInt(topK3.value) || 3;
+
+  // Basic validation to ensure a collection is selected (if loaded)
+  if (!collectionName && collectionSelect.options.length > 1) {
+     alert("Please select a collection first.");
+     return;
+  }
 
   // Disable send button during request
   sendBtn.disabled = true;
@@ -359,7 +417,7 @@ async function sendMessage() {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   try {
-    // Make API request with new parameters
+    // Make API request with collection_name and top_k
     const response = await fetch('http://localhost:6789/chat', {
       method: 'POST',
       headers: {
@@ -367,6 +425,7 @@ async function sendMessage() {
       },
       body: JSON.stringify({ 
         message: content,
+        collection_name: collectionName,
         top_k_layer_1: k1,
         top_k_layer_2: k2,
         top_k_layer_3: k3

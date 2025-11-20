@@ -180,7 +180,7 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: slideDown 0.3s ease-out;
@@ -209,19 +209,63 @@
     white-space: nowrap;
   }
 
+  /* Input Styling */
   .setting-item input {
-    width: 70px;
-    padding: 6px 10px;
+    width: 60px;
+    padding: 6px 8px;
     border-radius: 6px;
     border: 2px solid transparent;
     outline: none;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
+    transition: transform 0.2s;
   }
 
   .setting-item input:focus {
     transform: scale(1.05);
+  }
+
+  /* Select Styling */
+  .select-wrapper {
+    position: relative;
+  }
+
+  .settings-panel select {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 30px 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    min-width: 150px;
+    max-width: 250px;
+  }
+
+  .settings-panel select:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+  }
+
+  .settings-panel select option {
+    background: white;
+    color: var(--text-primary);
+  }
+
+  /* Add custom arrow for select */
+  .select-wrapper::after {
+    content: '▼';
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   /* Layer specific input styling */
@@ -931,5 +975,10 @@
     
     .setting-item {
         justify-content: space-between;
+    }
+
+    .settings-panel select {
+        width: 100%;
+        max-width: none;
     }
   }

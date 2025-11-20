@@ -65,7 +65,8 @@ class ChatRAG():
 
             layer1_context = self.layer_1_retrieval(
                 vector=vector,
-                topk=chat_request.top_k_layer_1
+                topk=chat_request.top_k_layer_1,
+                collection_name=chat_request.collection_name
             )
             file_ids = []
             for idx, cntx in enumerate(layer1_context):
@@ -79,7 +80,8 @@ class ChatRAG():
                 filters={
                     "file_id" : file_ids
                 },
-                topk=chat_request.top_k_layer_2
+                topk=chat_request.top_k_layer_2,
+                collection_name=chat_request.collection_name
             )
             
             context = ""
@@ -135,10 +137,15 @@ class ChatRAG():
                 "citations" : []
             }            
 
-    def layer_1_retrieval(self, vector: dict, topk: int):
+    def layer_1_retrieval(
+            self, 
+            vector: dict, 
+            topk: int,
+            collection_name: str
+    ):
         try:
             retrieved_context = vector_store_obj.hybrid_search(
-                collection_name=self.milvus_settings.collection_name,
+                collection_name=collection_name,
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer1],
@@ -149,10 +156,16 @@ class ChatRAG():
             self.logger.error(f"Failed in Layer-1 retrieval: {str(e)}")
 
 
-    def layer_2_retrieval(self, vector: dict, filters: dict, topk: int):
+    def layer_2_retrieval(
+            self, 
+            vector: dict, 
+            filters: dict, 
+            topk: int,
+            collection_name: str
+    ):
         try:
             retrieved_context = vector_store_obj.hybrid_search(
-                collection_name=self.milvus_settings.collection_name,
+                collection_name=collection_name,
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer2],

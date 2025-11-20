@@ -42,16 +42,27 @@
 
         <!-- Settings Panel (Hidden by default) -->
         <div id="settingsPanel" class="settings-panel hidden">
+          <!-- Collection Dropdown -->
+          <div class="setting-item collection-setting">
+            <label for="collectionSelect">Collection</label>
+            <div class="select-wrapper">
+              <select id="collectionSelect">
+                <option value="" disabled selected>Loading...</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Top K Inputs -->
           <div class="setting-item layer-1-setting">
-            <label for="topK1">Layer 1 Top K</label>
-            <input type="number" id="topK1" value="3" min="1" max="20">
+            <label for="topK1">L1 Top K</label>
+            <input type="number" id="topK1" value="2" min="1" max="20">
           </div>
           <div class="setting-item layer-2-setting">
-            <label for="topK2">Layer 2 Top K</label>
-            <input type="number" id="topK2" value="3" min="1" max="20">
+            <label for="topK2">L2 Top K</label>
+            <input type="number" id="topK2" value="5" min="1" max="20">
           </div>
           <div class="setting-item layer-3-setting">
-            <label for="topK3">Layer 3 Top K</label>
+            <label for="topK3">L3 Top K</label>
             <input type="number" id="topK3" value="3" min="1" max="20">
           </div>
         </div>

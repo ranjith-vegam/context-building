@@ -17,6 +17,7 @@ class ChatRequest(BaseModel):
     top_k_layer_1: int
     top_k_layer_2: int
     top_k_layer_3: int
+    collection_name: str
 
 
 # Response model
