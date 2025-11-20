@@ -28,3 +28,136 @@
 11/20/2025 10:39:35 AM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
 11/20/2025 10:39:35 AM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 2, 'successful': 2, 'failed': 0}
 11/20/2025 10:39:35 AM - [           layer3.py::120] -         INFO -             MainThread  - store_in_vector_db - LLM output: 67, milvus: 67
+11/20/2025 12:46:11 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 12:46:11 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 3 requests with max_concurrency=3
+11/20/2025 12:46:11 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 12:46:11 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 12:46:11 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 12:46:37 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 12:46:37 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 12:46:41 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 12:46:41 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 12:46:46 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 12:46:46 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 12:46:46 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 3, 'successful': 3, 'failed': 0}
+11/20/2025 12:46:46 PM - [           layer3.py::120] -         INFO -             MainThread  - store_in_vector_db - LLM output: 120, milvus: 120
+11/20/2025 02:09:24 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-1 Prompt Tokens - [4665]
+11/20/2025 02:09:25 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-2 Prompt Tokens - [4749]
+11/20/2025 02:09:26 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-3 Prompt Tokens - [4600]
+11/20/2025 02:09:26 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-4 Prompt Tokens - [4569]
+11/20/2025 02:09:27 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-5 Prompt Tokens - [4790]
+11/20/2025 02:09:28 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-6 Prompt Tokens - [646]
+11/20/2025 02:09:28 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 02:09:28 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 6 requests with max_concurrency=3
+11/20/2025 02:09:28 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 02:09:28 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 02:09:28 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 02:09:47 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 02:09:47 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:09:47 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_3
+11/20/2025 02:10:05 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 02:10:05 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:10:05 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_4
+11/20/2025 02:10:11 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 02:10:11 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:10:11 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_5
+11/20/2025 02:10:15 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_5
+11/20/2025 02:10:15 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:10:40 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_3
+11/20/2025 02:10:40 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:11:12 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_4
+11/20/2025 02:11:12 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:11:12 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 6, 'successful': 6, 'failed': 0}
+11/20/2025 02:11:12 PM - [           layer3.py::127] -         INFO -             MainThread  - store_in_vector_db - LLM output: 376, milvus: 376
+11/20/2025 02:29:53 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-1 Prompt Tokens - [4992]
+11/20/2025 02:29:54 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-2 Prompt Tokens - [5074]
+11/20/2025 02:29:54 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-3 Prompt Tokens - [4913]
+11/20/2025 02:29:55 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-4 Prompt Tokens - [5190]
+11/20/2025 02:29:56 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-5 Prompt Tokens - [3471]
+11/20/2025 02:29:56 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 02:29:56 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 5 requests with max_concurrency=3
+11/20/2025 02:29:56 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 02:29:56 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 02:29:56 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 02:30:14 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 02:30:14 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:30:14 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_3
+11/20/2025 02:30:37 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 02:30:37 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:30:37 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_4
+11/20/2025 02:31:10 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 02:31:10 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:31:47 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_4
+11/20/2025 02:31:47 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:31:49 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_3
+11/20/2025 02:31:49 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:31:49 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 5, 'successful': 5, 'failed': 0}
+11/20/2025 02:31:49 PM - [           layer3.py::100] -        ERROR -             MainThread  - process - Couldn't process layer-2: Unterminated string starting at: line 135 column 5 (char 15332)
+11/20/2025 02:36:08 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-1 Prompt Tokens - [4939]
+11/20/2025 02:36:09 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-2 Prompt Tokens - [4799]
+11/20/2025 02:36:09 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-3 Prompt Tokens - [3864]
+11/20/2025 02:36:09 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 02:36:09 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 3 requests with max_concurrency=3
+11/20/2025 02:36:09 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 02:36:09 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 02:36:09 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 02:36:30 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 02:36:30 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:36:36 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 02:36:36 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:36:44 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 02:36:44 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:36:44 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 3, 'successful': 3, 'failed': 0}
+11/20/2025 02:36:44 PM - [           layer3.py::127] -         INFO -             MainThread  - store_in_vector_db - LLM output: 141, milvus: 141
+11/20/2025 02:38:57 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-1 Prompt Tokens - [4690]
+11/20/2025 02:38:57 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-2 Prompt Tokens - [4918]
+11/20/2025 02:38:58 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-3 Prompt Tokens - [4764]
+11/20/2025 02:38:58 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-4 Prompt Tokens - [4918]
+11/20/2025 02:38:59 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-5 Prompt Tokens - [3153]
+11/20/2025 02:38:59 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 02:38:59 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 5 requests with max_concurrency=3
+11/20/2025 02:38:59 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 02:38:59 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 02:38:59 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 02:39:19 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 02:39:19 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:39:19 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_3
+11/20/2025 02:39:26 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 02:39:26 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:39:26 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_4
+11/20/2025 02:39:36 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_4
+11/20/2025 02:39:36 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:39:39 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 02:39:39 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:39:46 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_3
+11/20/2025 02:39:46 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:39:46 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 5, 'successful': 5, 'failed': 0}
+11/20/2025 02:39:46 PM - [           layer3.py::127] -         INFO -             MainThread  - store_in_vector_db - LLM output: 156, milvus: 156
+11/20/2025 02:42:49 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-1 Prompt Tokens - [4675]
+11/20/2025 02:42:50 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-2 Prompt Tokens - [4838]
+11/20/2025 02:42:50 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-3 Prompt Tokens - [4827]
+11/20/2025 02:42:51 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-4 Prompt Tokens - [4929]
+11/20/2025 02:42:52 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-5 Prompt Tokens - [4833]
+11/20/2025 02:42:52 PM - [           layer3.py::70] -         INFO -             MainThread  - process - Layer-3 : chunk-6 Prompt Tokens - [3703]
+11/20/2025 02:42:52 PM - [       llm_client.py::289] -         INFO -             MainThread  - chat - Starting chat request(s) to http://192.168.1.49:9991/v1 with model RedHatAI/phi-4-quantized.w8a8
+11/20/2025 02:42:52 PM - [       llm_client.py::309] -         INFO -             MainThread  - chat - Processing batch of 6 requests with max_concurrency=3
+11/20/2025 02:42:52 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_0
+11/20/2025 02:42:52 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_1
+11/20/2025 02:42:52 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_2
+11/20/2025 02:43:11 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_0
+11/20/2025 02:43:11 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:43:11 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_3
+11/20/2025 02:43:28 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_1
+11/20/2025 02:43:28 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:43:28 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_4
+11/20/2025 02:43:38 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_3
+11/20/2025 02:43:38 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:43:38 PM - [       llm_client.py::82] -         INFO -             MainThread  - _single_chat_request - Starting request: req_5
+11/20/2025 02:43:52 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_2
+11/20/2025 02:43:52 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:43:53 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_4
+11/20/2025 02:43:53 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:44:03 PM - [       llm_client.py::89] -         INFO -             MainThread  - _single_chat_request - Request completed: req_5
+11/20/2025 02:44:03 PM - [       llm_client.py::111] -         INFO -             MainThread  - _single_chat_request - Chat request successful
+11/20/2025 02:44:03 PM - [       llm_client.py::345] -         INFO -             MainThread  - chat - Batch processing completed, summary: {'total_requests': 6, 'successful': 6, 'failed': 0}
+11/20/2025 02:44:03 PM - [           layer3.py::127] -         INFO -             MainThread  - store_in_vector_db - LLM output: 135, milvus: 135

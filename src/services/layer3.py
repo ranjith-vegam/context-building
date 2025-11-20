@@ -59,12 +59,18 @@ class Layer3:
             
             messages = []
             for idx, trans_chunk in enumerate(self.data_manager_obj.merged_transcript_chunks):
+                message_content = self.layer3_prompt.format(
+                    layer2_topics=self.layer2_obj.results[idx]["topics"],
+                    C_raw=trans_chunk
+                )
+                chat_prompt_tokens = get_batched_token_estimation(
+                    texts=[message_content],
+                    model_name=self.data_manager_obj.model_details.model_name
+                )
+                self.logger.info(f"Layer-3 : chunk-{idx+1} Prompt Tokens - {chat_prompt_tokens}")
                 messages.append([{
                         "role" : "user",
-                        "content" : self.layer3_prompt.format(
-                            layer2_topics=self.layer2_obj.results[idx]["topics"],
-                            C_raw=trans_chunk
-                        )
+                        "content" : message_content
                     }])
             
             # Calling LLM
@@ -74,7 +80,8 @@ class Layer3:
                 messages_list=messages,
                 max_concurrency=self.data_manager_obj.model_details.max_concurrency,
                 args=self.layer3_settings.llm_args.model_dump(exclude_none=True),
-                logger=self.logger
+                logger=self.logger,
+                timeout=300
             )
                 
             for idx, resp in enumerate(llm_results):

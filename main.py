@@ -1,6 +1,5 @@
 from src.models import ModelDetailsConfig
 
-from src.services.chat_rag import ChatRAG
 from src.services.data_manager import DataManager
 from src.services.layer1 import Layer1
 from src.services.layer2 import Layer2
@@ -33,7 +32,9 @@ def build_context(transcript_filepath: str):
     layer3_obj.store_in_vector_db()
 
 def main():
-    build_context("tmp/1hr_transcript.txt")
+    build_context("tmp/Day 1 - NorthAmerica_Lean_Lab_Jul08_transcript.txt")
+    build_context("tmp/Day-08 Lean_lab_20251119162712_transcript.txt")
+    build_context("tmp/LeanLab-Mockups-20240910_transcript.txt")
 
 if __name__ == "__main__":
     main()

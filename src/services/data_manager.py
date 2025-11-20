@@ -74,7 +74,7 @@ class DataManager:
             if buffer_texts:
                 self.merged_transcript_chunks.append(" ".join(buffer_texts))
             
-            self.logger.info("Merged transcript chunks according to model's prompt tokens threshold")
+            self.logger.info(f"Merged transcript chunks according to model's prompt tokens threshold - {len(self.merged_transcript_chunks)} chunks")
             return self.merged_transcript_chunks
         
         except Exception as e:

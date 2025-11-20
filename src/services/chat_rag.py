@@ -79,6 +79,7 @@ class ChatRAG():
             
             context = ""
             for idx, cntx in enumerate(layer2_context):
+                self.logger.info(f"doc-{idx+1} from {cntx["file_id"]}")
                 metadata = cntx["metadata"]
                 context += f"{metadata["topic"]}\n{metadata["content"]}\n\n"
                 layer2_context[idx]["layer"] = 2
@@ -136,7 +137,7 @@ class ChatRAG():
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer1],
-                top_K=3
+                top_K=2
             )
             return retrieved_context
         except Exception as e:
@@ -150,7 +151,7 @@ class ChatRAG():
                 dense_vector=vector["dense_vector"],
                 sparse_vector=vector['sparse_vector'],
                 partition_names=[self.milvus_settings.partition_layer2],
-                top_K=3,
+                top_K=5,
                 filters=filters
             )
             return retrieved_context

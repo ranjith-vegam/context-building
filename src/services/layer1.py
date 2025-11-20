@@ -57,13 +57,19 @@ class Layer1:
             
             previous_chunk_summary = ""
             for idx, trans_chunk in enumerate(self.data_manager_obj.merged_transcript_chunks):
+                message_content = self.layer1_prompt.format(
+                    S_prev=previous_chunk_summary,
+                    C_curr=trans_chunk
+                )
+                chat_prompt_tokens = get_batched_token_estimation(
+                    texts=[message_content],
+                    model_name=self.data_manager_obj.model_details.model_name
+                )
+                self.logger.info(f"Layer-1 : chunk-{idx+1} Prompt Tokens - {chat_prompt_tokens}")                
                 messages = [
                     {
                         "role" : "user",
-                        "content" : self.layer1_prompt.format(
-                            S_prev=previous_chunk_summary,
-                            C_curr=trans_chunk
-                        )
+                        "content" : message_content
                     }                   
                 ]
             
@@ -74,9 +80,13 @@ class Layer1:
                     messages_list=messages,
                     max_concurrency=self.data_manager_obj.model_details.max_concurrency,
                     args=self.layer1_settings.llm_args.model_dump(exclude_none=True),
-                    logger=self.logger
+                    logger=self.logger,
+                    timeout=300
                 )
-                previous_chunk_summary = json.loads(llm_results[0].response)["summary"]
+                raw_resp = llm_results[0].response
+                self.logger.error(f"RAW LLM RESPONSE:\n{raw_resp}")
+                previous_chunk_summary = json.loads(raw_resp)["summary"]
+                
                 self.results.append({
                     "transcript_chunk" : trans_chunk,
                     "summary" : previous_chunk_summary,

@@ -1,26 +1,24 @@
 You are an expert Meaning Unit Extractor.
 
-Your job is to convert the given transcript chunk into a set of standalone, semantically complete Meaning Units (MUs).  
-Each MU must:
+Task:
+Convert the transcript chunk into standalone Meaning Units (MUs).
 
-- represent a single coherent idea or meaningful statement
-- be self-contained and understandable without the original transcript
-- contain all relevant context needed for retrieval
-- avoid speaker names, timestamps, or structural labels
-- avoid merging separate ideas into one MU
-- avoid hallucinations or assumptions
-- maintain original factual meaning with no embellishment
+Rules:
+- Each MU expresses one complete idea.
+- Must be self-contained and understandable without the transcript.
+- Include all necessary context for retrieval.
+- No speaker names, timestamps, or structural labels.
+- Do not merge unrelated ideas.
+- No added information or hallucinations.
+- Preserve original factual meaning.
 
-Output Requirements:
-- Output ONLY a JSON array of strings.
-- Each array element must be one MU as plain text.
-- No metadata, no keys, no explanations, no commentary.
+Output:
+- ONLY a JSON array of strings.
+- Each string is one MU.
 
 Input:
-Layer 2 Topics (context only):
+Layer2 Topics (context only):
 {layer2_topics}
 
-Raw Transcript Chunk (C_raw):
+Transcript Chunk:
 {C_raw}
-
-Now extract the Meaning Units and output only the array of text MUs.

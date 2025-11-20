@@ -135,8 +135,13 @@ function openCitationDrawer(citationsList = []) {
       const card = document.createElement('div');
       card.className = 'citation-card';
 
-      // Layer label
+      // Layer label with file name
       const layerVal = String(citationObj.layer || '');
+      const fileName = citationObj.file_name || citationObj.filename || '';
+      
+      const layerInfoWrapper = document.createElement('div');
+      layerInfoWrapper.className = 'layer-info';
+      
       const layerLabel = document.createElement('div');
       layerLabel.className = 'layer-label';
       
@@ -153,7 +158,17 @@ function openCitationDrawer(citationsList = []) {
         layerLabel.textContent = `Layer ${layerVal}`;
       }
       
-      card.appendChild(layerLabel);
+      layerInfoWrapper.appendChild(layerLabel);
+      
+      // Add file name badge if it exists
+      if (fileName) {
+        const fileNameBadge = document.createElement('div');
+        fileNameBadge.className = 'file-name-badge';
+        fileNameBadge.textContent = fileName;
+        layerInfoWrapper.appendChild(fileNameBadge);
+      }
+      
+      card.appendChild(layerInfoWrapper);
 
       // Add citation number
       const citationNumber = document.createElement('div');
@@ -163,7 +178,7 @@ function openCitationDrawer(citationsList = []) {
 
       // Process each field
       Object.keys(citationObj).forEach((key) => {
-        if (key === 'layer') return; // Skip layer as it's already shown
+        if (key === 'layer' || key === 'file_name' || key === 'filename') return; // Skip these as they're shown in header
         
         const field = document.createElement('div');
         field.className = 'citation-field';
