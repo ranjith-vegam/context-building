@@ -1,3 +1,5 @@
+from argparse import MetavarTypeHelpFormatter
+from curses import meta
 import json
 import numpy as np
 import markdown
@@ -85,14 +87,20 @@ class ChatRAG():
             )
             
             context = ""
+            ref_transcript_chunks = set()
             for idx, cntx in enumerate(layer2_context):
                 self.logger.info(f"doc-{idx+1} from {cntx["file_id"]}")
                 metadata = cntx["metadata"]
+
+                ref_transcript_chunks.add(metadata["transcript_chunk"])
                 context += f"{metadata["topic"]}\n{metadata["content"]}\n\n"
                 layer2_context[idx]["layer"] = 2
                 layer2_context[idx]["file_name"] = "_".join(cntx["metadata"]["file_name"].split("_")[:-1])
                 del layer2_context[idx]["file_id"]
             
+            context += f"Raw Transcript Chunks:\n"
+            context += "\n".join([trans_chunk for trans_chunk in ref_transcript_chunks])
+            print(context)
             if not self.chat_prompt:
                 self.chat_prompt = read_prompt_file(
                     prompt_filepath=self.chat_settings.prompt_filepath

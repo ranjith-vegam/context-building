@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
 async function fetchCollections() {
   try {
     // Assuming the endpoint is /collections
-    const response = await fetch('http://localhost:6789/collections', {method: 'POST'});
+    const response = await fetch('http:///192.168.3.196:6789/collections', {method: 'POST'});
     
     if (!response.ok) {
       throw new Error('Failed to fetch collections');
@@ -418,7 +418,7 @@ async function sendMessage() {
 
   try {
     // Make API request with collection_name and top_k
-    const response = await fetch('http://localhost:6789/chat', {
+    const response = await fetch('http://192.168.3.196:6789/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -455,7 +455,7 @@ async function sendMessage() {
     
     // Show error message
     const errorMessage = err.message.includes('Failed to fetch')
-      ? '⚠️ Unable to connect to the server. Please check if the server is running on http://localhost:6789'
+      ? '⚠️ Unable to connect to the server. Please check if the server is running on http:///192.168.3.196:6789'
       : `⚠️ Error: ${err.message}`;
     
     appendBotMessage(errorMessage, []);

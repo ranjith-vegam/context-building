@@ -48,7 +48,7 @@ class Layer3:
             }
         }
     
-    def process(self, results_file_path: str):
+    def process(self):
         try:
             if not self.layer3_prompt:
                 self.layer3_prompt = read_prompt_file(
@@ -92,9 +92,6 @@ class Layer3:
                         "granular_chunks" : granular_chunks
                     }
                 )
-            
-            with open(results_file_path, "w") as f:
-                json.dump(self.results, f, indent=4)
             
         except Exception as e:
             self.logger.error(f"Couldn't process layer-2: {str(e)}")

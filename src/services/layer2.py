@@ -59,7 +59,7 @@ class Layer2:
             }
         }        
     
-    def process(self, results_file_path: str):
+    def process(self):
         try:
             if not self.layer2_prompt:
                 self.layer2_prompt = read_prompt_file(
@@ -100,12 +100,10 @@ class Layer2:
                 self.results.append(
                     {
                         "chunk-id" : f"chunk-{idx+1}",
-                        "topics" : topics_arr
+                        "topics" : topics_arr,
+                        "trans_chunk" : self.layer1_obj.results[idx]["transcript_chunk"]
                     }
                 )
-            
-            with open(results_file_path, "w") as f:
-                json.dump(self.results, f, indent=4)
             
         except Exception as e:
             self.logger.error(f"Couldn't process layer-2: {str(e)}")
@@ -121,6 +119,7 @@ class Layer2:
                 )                
                 for idx, metadata in enumerate(res['topics']):
                     metadata["file_name"] = self.data_manager_obj.file_path.split("/")[1].split(".")[0]
+                    metadata["transcript_chunk"] = res["trans_chunk"]
                     layer2_docs.append(
                         {
                             "id" : get_uuid(),

@@ -42,6 +42,7 @@ async def run_in_thread(func, *args, **kwargs):
 # Chat endpoint
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(req: ChatRequest):
+    print(req.model_dump())
     resp =  await run_in_thread(chat_obj.chat_query, req)
 
     return ChatResponse(
@@ -53,7 +54,8 @@ async def chat_endpoint(req: ChatRequest):
 @app.post("/collections")
 async def chat_endpoint():
     return [
-        "testing"
+        "LeanLab",
+        "internal_testing_2_layered"
     ]
 
 

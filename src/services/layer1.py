@@ -46,7 +46,7 @@ class Layer1:
         }
         
     
-    def process(self, results_file_path: str):
+    def process(self):
         try:
             if not self.layer1_prompt:
                 self.layer1_prompt = read_prompt_file(
@@ -84,7 +84,6 @@ class Layer1:
                     timeout=300
                 )
                 raw_resp = llm_results[0].response
-                self.logger.error(f"RAW LLM RESPONSE:\n{raw_resp}")
                 previous_chunk_summary = json.loads(raw_resp)["summary"]
                 
                 self.results.append({
@@ -96,9 +95,6 @@ class Layer1:
                     )[0],
                     "file_name" : self.data_manager_obj.file_path.split("/")[1].split(".")[0]
                 })
-            
-            with open(results_file_path, "w") as f:
-                json.dump(self.results, f, indent=4)
             
         except Exception as e:
             self.logger.error(f"Couldn't process layer-1: {str(e)}")
